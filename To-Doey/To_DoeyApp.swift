@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct To_DoeyApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+            // Step 2: Create a container for storing the provided model type.
+                .modelContainer(for: ToDoItem.self)
         }
     }
 }

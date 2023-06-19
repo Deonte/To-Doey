@@ -6,13 +6,26 @@
 //
 
 import SwiftUI
-
+import SwiftData
+// Update: In SwiftData you simply need to create a new view to handle the edit of the item.
 struct UpdateTodoView: View {
+    @Environment(\.dismiss) var dismiss
+    
+    // Create a bindable to the expected object to edit.
+    @Bindable var item: ToDoItem
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List {
+                TextField("Name", text: $item.title)
+                DatePicker("Choose Date",
+                           selection: $item.timeStamp)
+                Toggle("Important?", isOn: $item.isCritical)
+                Button("Update") {
+                    dismiss()
+                }
+            }
+            .navigationTitle("Update To-Do")
+        }
     }
-}
-
-#Preview {
-    UpdateTodoView()
 }
